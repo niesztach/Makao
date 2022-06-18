@@ -4,14 +4,14 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 
-enum Color{
+enum Color:int{
     spades,
     hearts,
     diamonds,
     clubs,
 };
 
-enum Value{
+enum Value:int{
     ace,
     two,
     three,
@@ -54,8 +54,6 @@ std::pair<int, int> figure(Color color,Value value)
        case two:{ b=11;break;}
        case ace:{ b=12;break;}
                 }
-
-   std::cout << "dupa " << std::endl;
    return std::pair<int, int> (a,b);
 }
 
@@ -74,9 +72,10 @@ public:
     virtual void triggerAction()=0;
     virtual void drawCard(Color)=0;
     virtual void drawCommonCard(Color,Value){};
-protected:
+    virtual bool is_Clicked(const sf::Vector2i){return 0;}
     Color color;
     Value value;
+    int val; int col;
 };
 
 class Aces : public Card
@@ -87,10 +86,17 @@ public:
             auto [a,b] = figure(c,value);
             setTextureRect(look(a,b));
     }
+                    bool is_Clicked(const sf::Vector2i mouse_pos)
+                      {sf::FloatRect  rectangle_bounds = getGlobalBounds();
+            if (mouse_pos.x > rectangle_bounds.left && mouse_pos.x < rectangle_bounds.left + rectangle_bounds.width)
+                       {{if (mouse_pos.y > rectangle_bounds.top && mouse_pos.y < rectangle_bounds.top + rectangle_bounds.height)
+                       return true;}}
+            return false;}
+            int val; int col;
+            Value value=ace;
+            Color color;
 protected:
     void triggerAction(){};
-    Value value=ace;
-    Color color;
 };
 
 class Twos : public Card
@@ -101,9 +107,17 @@ public:
             auto [a,b] = figure(c,value);
             setTextureRect(look(a,b));
     }
+                    bool is_Clicked(const sf::Vector2i mouse_pos)
+                      {sf::FloatRect  rectangle_bounds = getGlobalBounds();
+            if (mouse_pos.x > rectangle_bounds.left && mouse_pos.x < rectangle_bounds.left + rectangle_bounds.width)
+                       {{if (mouse_pos.y > rectangle_bounds.top && mouse_pos.y < rectangle_bounds.top + rectangle_bounds.height)
+                       return true;}}
+            return false;}
+                Value value = two;
+                        int val; int col;
 protected:
     void triggerAction(){};
-    Value value = two;
+
 };
 
 class Threes : public Card
@@ -114,9 +128,17 @@ public:
             auto [a,b] = figure(c,value);
             setTextureRect(look(a,b));
     }
+                    bool is_Clicked(const sf::Vector2i mouse_pos)
+                      {sf::FloatRect  rectangle_bounds = getGlobalBounds();
+            if (mouse_pos.x > rectangle_bounds.left && mouse_pos.x < rectangle_bounds.left + rectangle_bounds.width)
+                       {{if (mouse_pos.y > rectangle_bounds.top && mouse_pos.y < rectangle_bounds.top + rectangle_bounds.height)
+                       return true;}}
+            return false;}
+                Value value = three;
+                        int val; int col;
 protected:
     void triggerAction(){};
-    Value value = three;
+
 };
 
 class Fours : public Card
@@ -128,10 +150,18 @@ public:
     auto [a,b] = figure(c,value);
     setTextureRect(look(a,b));
 }
+            bool is_Clicked(const sf::Vector2i mouse_pos)
+              {sf::FloatRect  rectangle_bounds = getGlobalBounds();
+    if (mouse_pos.x > rectangle_bounds.left && mouse_pos.x < rectangle_bounds.left + rectangle_bounds.width)
+               {{if (mouse_pos.y > rectangle_bounds.top && mouse_pos.y < rectangle_bounds.top + rectangle_bounds.height)
+               return true;}}
+    return false;}
+        Value value = four;
+                int val; int col;
 
 protected:
     void triggerAction(){};
-    Value value = four;
+
 };
 
 class Commons : public Card
@@ -144,6 +174,13 @@ public:
                     auto [a,b] = figure(c,v);
                     setTextureRect(look(a,b));
      }
+                            bool is_Clicked(const sf::Vector2i mouse_pos)
+                              {sf::FloatRect  rectangle_bounds = getGlobalBounds();
+                    if (mouse_pos.x > rectangle_bounds.left && mouse_pos.x < rectangle_bounds.left + rectangle_bounds.width)
+                               {{if (mouse_pos.y > rectangle_bounds.top && mouse_pos.y < rectangle_bounds.top + rectangle_bounds.height)
+                               return true;}}
+                    return false;}
+                                int val; int col;
 protected:
     void triggerAction(){};
 
@@ -157,9 +194,17 @@ public:
             auto [a,b] = figure(c,value);
             setTextureRect(look(a,b));
     }
+                    bool is_Clicked(const sf::Vector2i mouse_pos)
+                      {sf::FloatRect  rectangle_bounds = getGlobalBounds();
+            if (mouse_pos.x > rectangle_bounds.left && mouse_pos.x < rectangle_bounds.left + rectangle_bounds.width)
+                       {{if (mouse_pos.y > rectangle_bounds.top && mouse_pos.y < rectangle_bounds.top + rectangle_bounds.height)
+                       return true;}}
+            return false;}
+                Value value = jack;
+                        int val; int col;
 protected:
     void triggerAction(){};
-    Value value = jack;
+
 };
 
 class Kings : public Card
@@ -170,9 +215,17 @@ public:
             auto [a,b] = figure(c,value);
             setTextureRect(look(a,b));
     }
+                    bool is_Clicked(const sf::Vector2i mouse_pos)
+                      {sf::FloatRect  rectangle_bounds = getGlobalBounds();
+            if (mouse_pos.x > rectangle_bounds.left && mouse_pos.x < rectangle_bounds.left + rectangle_bounds.width)
+                       {{if (mouse_pos.y > rectangle_bounds.top && mouse_pos.y < rectangle_bounds.top + rectangle_bounds.height)
+                       return true;}}
+            return false;}
+                Value value = king;
+                        int val; int col;
 protected:
     void triggerAction(){};
-    Value value = king;
+
 };
 
 #endif // CARD_H

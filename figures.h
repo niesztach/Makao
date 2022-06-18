@@ -1,48 +1,57 @@
 #ifndef FIGURES_H
 #define FIGURES_H
+#include <SFML/Window.hpp>
+#include <SFML/Graphics.hpp>
 #include "card.h"
 #include <iostream>
 
-void test()
-{
-    std::cout<<"test" << std::endl;
+sf::Texture sprites(){
+
+    sf::Texture Cards;
+    if (!Cards.loadFromFile("./../makao/cards.png"))
+    {
+        std::cerr << "Could not load texture" << std::endl;
+    }
+
+    return Cards;
 }
 
 
-//std::pair<int, int> figure(Color color,Value value)
-//{
-//   int a=21, b=37;
+std::vector<std::unique_ptr<Card>> test(sf::Texture Cards)
+{
+    std::vector<std::unique_ptr<Card>> cards;
+    std::array<Color, 4> colors{ {spades, hearts, diamonds, clubs} };
+    std::array<Value, 6> values{ace, two, three, four, jack, king};
+    Commons element;
 
-//   switch (color){
-//       case clubs:{ a=0; break;}
-//       case diamonds:{ a=1; break;}
-//       case spades:{ a=2; break;}
-//       case hearts:{ a=3; break;}
-//                 }
+    for (int i = 0; i<4; i++)
+    {
+        auto e = colors[i];
+        auto u = i;
+     for (int i =0; i<6; i++)
+     {
+         element.setTexture(Cards); element.drawCommonCard(e,values[i]); element.setPosition(100+i*70,100+u*80); cards.emplace_back(std::make_unique<Commons>(element));
+     }
+    }
 
-//   switch (value){
-//       case king:{ b=0; break;}
-//       case queen:{ b=1; break;}
-//       case jack:{ b=2; break;}
-//       case ten:{ b=3; break;}
-//       case nine:{ b=4; break;}
-//       case eight:{ b=5; break;}
-//       case seven:{ b=6; break;}
-//       case six:{ b=7;break;}
-//       case five:{ b=8;break;}
-//       case four:{ b=9;break;}
-//       case three:{ b=10;break;}
-//       case two:{ b=11;break;}
-//       case ace:{ b=12;break;}
-//                }
+    Commons siodemka;   siodemka.setTexture(Cards); siodemka.drawCommonCard(clubs,seven); siodemka.setPosition(570,360); cards.emplace_back(std::make_unique<Commons>(siodemka));
 
-//   std::cout << "dupa " << std::endl;
-//   return std::pair<int, int> (a,b);
-//}
+return cards;
+}
 
-//sf::IntRect look(int a, int b)
-//{
-//    return sf::IntRect((18+88*b+b),(7+119*a+a),88,119);
-//}
+bool isClicked(sf::Vector2i &mouse_pos, sf::Sprite &sprite)
+{
+    sf::FloatRect  rectangle_bounds = sprite.getGlobalBounds();
+
+    if (mouse_pos.x > rectangle_bounds.left && mouse_pos.x < rectangle_bounds.left + rectangle_bounds.width)
+    {
+        {
+            if (mouse_pos.y > rectangle_bounds.top && mouse_pos.y < rectangle_bounds.top + rectangle_bounds.height)
+        {       std::cout<<"OK"<< std::endl;
+                return true;}
+        }
+    }
+    return false;
+}
 
 #endif // FIGURES_H

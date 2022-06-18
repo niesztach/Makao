@@ -1,5 +1,5 @@
 TEMPLATE = app
-CONFIG += console c++20
+CONFIG += console c++11
 CONFIG -= app_bundle
 CONFIG -= qt
 INCLUDEPATH += "C:/SFML-2.5.0/include"
