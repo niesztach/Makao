@@ -63,13 +63,12 @@ sf::IntRect look(int a, int b)
 }
 
 
-
 class Card : public sf::Sprite
 {
 public:
     Card() : Sprite() {};
     virtual ~Card() = default;
-    virtual void triggerAction()=0;
+    virtual int triggerAction()=0;
     virtual void drawCard(Color)=0;
     virtual void drawCommonCard(Color,Value){};
     virtual bool is_Clicked(const sf::Vector2i){return 0;}
@@ -92,11 +91,11 @@ public:
                        {{if (mouse_pos.y > rectangle_bounds.top && mouse_pos.y < rectangle_bounds.top + rectangle_bounds.height)
                        return true;}}
             return false;}
-            int val; int col;
             Value value=ace;
             Color color;
 protected:
-    void triggerAction(){};
+    int triggerAction(){std::cout<<"TO JEST FUNKCJA Z ASA! \n";
+                       return 0;};
 };
 
 class Twos : public Card
@@ -114,9 +113,9 @@ public:
                        return true;}}
             return false;}
                 Value value = two;
-                        int val; int col;
 protected:
-    void triggerAction(){};
+    int triggerAction(){std::cout<<"TO JEST FUNKCJA Z DWOJKI! \n";
+                       return 2;};
 
 };
 
@@ -135,9 +134,9 @@ public:
                        return true;}}
             return false;}
                 Value value = three;
-                        int val; int col;
 protected:
-    void triggerAction(){};
+    int triggerAction(){std::cout<<"TO JEST FUNKCJA Z TROJKI! \n";
+                       return 3;};
 
 };
 
@@ -157,10 +156,10 @@ public:
                return true;}}
     return false;}
         Value value = four;
-                int val; int col;
 
 protected:
-    void triggerAction(){};
+    int triggerAction(){std::cout<<"TO JEST FUNKCJA Z CZWORKI! \n";
+                       return 1;};
 
 };
 
@@ -180,9 +179,8 @@ public:
                                {{if (mouse_pos.y > rectangle_bounds.top && mouse_pos.y < rectangle_bounds.top + rectangle_bounds.height)
                                return true;}}
                     return false;}
-                                int val; int col;
 protected:
-    void triggerAction(){};
+   int triggerAction(){return 0;};
 
 };
 
@@ -201,9 +199,9 @@ public:
                        return true;}}
             return false;}
                 Value value = jack;
-                        int val; int col;
 protected:
-    void triggerAction(){};
+    int triggerAction(){std::cout<<"TO JEST FUNKCJA Z JOPKA! \n";
+                       return 0;};
 
 };
 
@@ -222,9 +220,9 @@ public:
                        return true;}}
             return false;}
                 Value value = king;
-                        int val; int col;
 protected:
-    void triggerAction(){};
+    int triggerAction(){std::cout<<"TO JEST FUNKCJA Z KROLA! \n";
+                       return 5;};
 
 };
 
